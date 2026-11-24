@@ -1,4 +1,4 @@
-"""CodeAlpha Data Science Internship - Task 3: Car Price Prediction"""
+"""Task 3: Car Price Prediction"""
 import os
 import numpy as np, pandas as pd
 import matplotlib
@@ -20,7 +20,8 @@ SEED = 42
 # ---------------- 1. Load & clean ----------------
 df = pd.read_csv("car_data.csv")
 print("Shape:", df.shape, "| Missing:", int(df.isna().sum().sum()), "| Duplicates:", df.duplicated().sum())
-df = df.drop_duplicates().reset_index(drop=True)   # 2 exact duplicate rows removed
+# exact duplicate rows removed
+df = df.drop_duplicates().reset_index(drop=True)   
 print("After removing duplicates:", df.shape)
 print(df.describe().round(2).T)
 
@@ -29,9 +30,10 @@ print(df.describe().round(2).T)
 REF_YEAR = df["Year"].max() + 1
 df["Car_Age"] = REF_YEAR - df["Year"]
 # Price drop vs. a new car: how much value the car has kept (used price / new price)
-df["Price_Retention"] = df["Selling_Price"] / df["Present_Price"]   # EDA only, NOT used as feature (uses target)
+df["Price_Retention"] = df["Selling_Price"] / df["Present_Price"]   
+# EDA only, NOT used as feature (uses target)
 # Car_Name has 98 unique models for ~300 rows -> too sparse to encode reliably, so it is dropped.
-# Present_Price and Driven_kms are heavily right-skewed (a few extreme cars, e.g. 92.6 lakhs / 500,000 km).
+# Present_Price and Driven_kms are heavily right-skewed (a few extreme cars).
 # Log-transforming them stops those outliers from dominating linear models.
 df["Log_Present_Price"] = np.log1p(df["Present_Price"])
 df["Log_Driven_kms"] = np.log1p(df["Driven_kms"])
