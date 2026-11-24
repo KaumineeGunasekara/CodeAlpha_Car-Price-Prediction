@@ -1,0 +1,6 @@
+Model,CV R2 (mean),CV R2 (std),Test R2,Test MAE,Test RMSE
+Linear Regression,0.81,0.059,0.487,2.164,3.637
+Linear Regression (log target),0.957,0.016,0.89,0.965,1.685
+Ridge (log target),0.955,0.015,0.891,0.957,1.68
+Random Forest,0.891,0.096,0.531,1.474,3.476
+Gradient Boosting,0.881,0.119,0.724,1.185,2.665
